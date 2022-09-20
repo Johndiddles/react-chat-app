@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import IncomingMessages from "../../components/incomingMessages/IncomingMessages.component";
 import OutgoingMessages from "../../components/outgoingMessages/OutgoingMessages.component";
@@ -6,12 +6,14 @@ import OutgoingMessages from "../../components/outgoingMessages/OutgoingMessages
 import { useSelector, useDispatch } from "react-redux";
 import { getUserName } from "../../redux/userSlice";
 import { getAllChats, addChat } from "../../redux/chatsSlice";
+import { useNavigate } from "react-router";
 
 const ChatRoom = ({ channel }) => {
   //** subscribe to channel */
   //   const channel = new BroadcastChannel("app-data");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentUser = useSelector(getUserName);
   const allChats = useSelector(getAllChats);
 
@@ -19,6 +21,12 @@ const ChatRoom = ({ channel }) => {
 
   console.log({ currentUser });
   console.log({ allChats });
+
+  useEffect(() => {
+    if (!currentUser || currentUser === "") {
+      navigate("/", { replace: true });
+    }
+  }, [currentUser, navigate]);
 
   const onSubmit = (e) => {
     e.preventDefault();
