@@ -1,8 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { createUser } from "../../redux/userSlice";
+
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const nameRef = useRef(null);
 
@@ -14,6 +18,7 @@ const Login = () => {
       nameRef.current.focus();
       return;
     }
+    dispatch(createUser(name));
     alert(`Welcome ${name}!`);
     navigate("/chat-room", { replace: true });
   };
