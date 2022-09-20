@@ -1,18 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  chats: [
-    {
-      id: "1",
-      userName: "John",
-      message: "John is here...",
-    },
-    {
-      id: "2",
-      userName: "Jerry",
-      message: "Jerry is here...",
-    },
-  ],
+  chats: [],
 };
 
 const chatsSlice = createSlice({
