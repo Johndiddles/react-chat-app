@@ -7,7 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserName } from "../../redux/userSlice";
 import { getAllChats, addChat } from "../../redux/chatsSlice";
 
-const ChatRoom = () => {
+const ChatRoom = ({ channel }) => {
+  //** subscribe to channel */
+  //   const channel = new BroadcastChannel("app-data");
+
   const dispatch = useDispatch();
   const currentUser = useSelector(getUserName);
   const allChats = useSelector(getAllChats);
@@ -27,6 +30,8 @@ const ChatRoom = () => {
 
     console.log(data);
     dispatch(addChat(data));
+    //** post message to all listening tabs */
+    channel.postMessage(data);
     setMessage("");
   };
 
