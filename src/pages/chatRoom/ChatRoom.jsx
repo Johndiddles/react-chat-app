@@ -2,7 +2,12 @@ import React from "react";
 import IncomingMessages from "../../components/incomingMessages/IncomingMessages.component";
 import OutgoingMessages from "../../components/outgoingMessages/OutgoingMessages.component";
 
+import { useSelector } from "react-redux";
+import { getUserName } from "../../redux/userSlice";
+
 const ChatRoom = () => {
+  const currentUser = useSelector(getUserName);
+  console.log({ currentUser });
   return (
     <div className="w-screen h-screen flex flex-col justify-between gap-4">
       <div className="w-full h-4 bg-gradient-to-r from-violet-700 to-fuchsia-700"></div>
